@@ -1,2 +1,2 @@
-# CompConc
-Laboratórios de Comp Conc
+# Computação Concorrente
+Laboratórios do aluno Carlos Cozzolino
