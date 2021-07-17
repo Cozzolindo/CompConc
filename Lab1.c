@@ -7,51 +7,73 @@
 #include <stdio.h>
 #include <stdlib.h> 
 #include <pthread.h>
+#include <math.h>
+
 // Definindo o tamanho máximo do array e o nº máx de threads
 #define max 10000
 #define mthread 2
-int num[max]; //Variável global para a lista
-int part = 0; //Auxiliar para dividir as threads
+int* num; //Variável global para a lista
 
+
+typedef struct{
+    int first;
+    int last;
+} t_Args;
 //Criando a thread:
 void *threads(void *arg){
-    // Cada thread precisa atuar em metade do array, logo, vamos dividi-las aqui
-    int thread_part = part++;
-    int pp;
+    t_Args *args = (t_Args *)arg; //Declarando a estrutura na thread
     
     // Tarefa que a thread irá  realizar
-    for(int i = (max/mthread)*thread_part; i < (thread_part+1)*(max/mthread); i++){
-        pp = num[i]*num[i];
-        printf("%d\t",pp);
-
+    for(int i = args->first; i< args->last; i++){
+        num[i] = num[i]*num[i];
     }
-
+    free(arg);
     pthread_exit(NULL);
 }
 
 int main(){
-    for (int i = 0; i < max; i++)
-    {
-        num[i] = i;//atribuindo valores pra lista
-    }
 
     pthread_t tid[mthread];
 
+    
+    //Criando o ponteiro de tamanho max:
+    num = (int *)malloc(sizeof(int) * max);
+
+    //Criando um vetor de com números de 0-10000:
+    for(int i = 0;i<max;i++){
+		num[i] = i; 
+	}
+    
+
+    t_Args *arg;//Struct com argumentos da thread
+    
+
     for(int i = 0; i < mthread; i++){
-        pthread_create(&tid[i],NULL,threads,(void*)NULL);
+        arg = malloc(sizeof(t_Args));
+        if(arg == NULL){
+            printf("ERROR\t====\t'malloc'\t");exit(-1);
+        }
+        arg->first = floor((double)max/mthread * i);
+        arg->last = floor((double)max/mthread * (i+1));
+        if (pthread_create(&tid[i],NULL,threads,(void*)arg)){
+            printf("ERROR\t====\t'pthread_create'\t");exit(-1);
+        };
     }
     for(int i = 0; i < mthread; i++){
         pthread_join(tid[i],NULL);
     }
+
+    for(int i = 0; i<max;i++){
+        printf("%d --> ",num[i]);
+    }
+
     return printf("\n FIM!");
     
 }
 
-//Threads não mantinham os elementos na mesma ordem!!
-
 /*
-     Reposta das outras atividades (que eu não sei dizer se precisavam ser entregues)
-
+     Reposta das outras atividades :
+     
     1- Existe sim mudança na ordem de execução das threads, já que quando criamos um fluxo
     de execução, cada thread terá uma ordem de execução aleatória e independente da função
     principal.
