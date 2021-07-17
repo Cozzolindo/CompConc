@@ -47,6 +47,8 @@ int main(){
     
 }
 
+//Threads não mantinham os elementos na mesma ordem!!
+
 /*
      Reposta das outras atividades (que eu não sei dizer se precisavam ser entregues)
 
