@@ -14,7 +14,7 @@ float* matB;
 float* saida;
 
 
-int main(int argc){
+int main(){
 
     int dimA,again;
     double inicio, fim, delta;
@@ -23,10 +23,10 @@ int main(int argc){
     //Parametros de entrada:
     INICIO:
     GET_TIME(inicio);
-    if(argc<2){
+    //if(argc<2){
         printf("\nDigite a dimensao das matrizes:\n");
         scanf("%d",&dimA);
-    }
+    //}
 
     if(dimA==0){
         puts("Insira uma dim valida!\n");
@@ -59,8 +59,8 @@ int main(int argc){
 
     for (int i = 0; i < dimA; i++){
         for(int j = 0; j<dimA; j++){
-            matA[i*dimA+j] = i+j;
-            matB[i*dimA+j] = i-j;
+            matA[i*dimA+j] = i-j;
+            matB[i*dimA+j] = j-i;
             saida[i*dimA+j] = 0;
         }
     }
@@ -96,14 +96,14 @@ int main(int argc){
             printf("%.1f ",matB[i*dimA+j]);
         }
         puts("");
-    }*/
+    }
     puts("\n\nVetor de saida");
     for(int i=0; i<dimA; i++){
         for(int j=0; j<dimA; j++){
             printf("%.1f ",saida[i*dimA+j]);
         }
         puts("");
-    }
+    }*/
    
 
     GET_TIME(inicio);
