@@ -140,7 +140,7 @@ int main(){
     
     //TESTES
     int caso;
-    printf("\nDeseja verificar a multiplicacao:\n 1 Sim \n 0 Nao\n");
+    printf("\nDeseja verificar a multiplicacao?\n 1 Sim \n 0 Nao\n");
     scanf("%d",&caso);
     switch(caso)
     {
