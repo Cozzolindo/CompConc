@@ -12,6 +12,7 @@ int nthreads;
 float* matA;
 float* matB;
 float* saida;
+int dim;
 
 typedef struct{
     int id;
@@ -32,25 +33,43 @@ void* thread(void* arg){
 
     pthread_exit(NULL);
 }
-int main(int argc){
+
+void multiplica(float* A, float* B,float* res){
+    
+    for(int i = 0; i < dim; i++){
+        for( int j = 0; j<dim; j++){
+            for(int k = 0; k<dim; k++){
+                res[i*dim+j] += A[i*(dim)+k] * B[k*(dim)+j];
+            }
+        }
+    }
+}
+
+
+
+int main(){
+
     double inicio, fim, delta;
     int dimA,again;
     pthread_t* tid;
     tArgs* args;
-
+    float* A;
+    float* B;
+    float* res;
 
     //Parametros de entrada:
     INICIO:
     GET_TIME(inicio);
-    if(argc<2){
-        printf("\nDigite a dimensao das matrizes:\n");
-        scanf("%d",&dimA);
-        printf("\nDigite o numero de threads:\n");
-        scanf("%d",&nthreads);
-    }
+
+    printf("\nDigite a dimensao das matrizes:\n");
+    scanf("%d",&dimA);
+    printf("\nDigite o numero de threads:\n");
+    scanf("%d",&nthreads);
+    dim = dimA;
     if(nthreads>dimA){
         nthreads=dimA;
     }
+
     //Alocação de memória:
 
     matA = (float *)malloc(sizeof(float) * dimA * dimA);
@@ -87,8 +106,8 @@ int main(int argc){
 
     for (int i = 0; i < dimA; i++){
         for(int j = 0; j<dimA; j++){
-            matA[i*dimA+j] = i+j;
-            matB[i*dimA+j] = i-j;
+            matA[i*dimA+j] = i-j;
+            matB[i*dimA+j] = j-i;
             saida[i*dimA+j] = 0;
         }
     }
@@ -96,7 +115,7 @@ int main(int argc){
     GET_TIME(fim);
     delta = fim - inicio;
     printf("Tempo de inicializacao:%lf\n",delta);
-
+    
     //Chamando as threads:
 
     GET_TIME(inicio);
@@ -118,41 +137,82 @@ int main(int argc){
     GET_TIME(fim);
     delta = fim - inicio;
     printf("Tempo de multiplicacao:%lf\n",delta);
-
-
-    //Vendo as matrizes criadas:
-/*
-    puts("Matriz de entrada");
-    for(int i=0; i<dimA; i++){
-        for(int j=0; j<dimA; j++){
-            printf("%.1f ",matA[i*dimA+j]);
+    
+    //TESTES
+    int caso;
+    printf("\nDeseja verificar a multiplicacao:\n 1 Sim \n 0 Nao\n");
+    scanf("%d",&caso);
+    switch(caso)
+    {
+    case 0:
+        puts("Grazadeus!\n");
+        goto FREE;
+    
+    case 1:
+        puts("\nE la vamos nos.\n");
+        A = (float *)malloc(sizeof(float) * dim * dim);
+        B = (float *)malloc(sizeof(float) * dim * dim);
+        res = (float *)malloc(sizeof(float) * dim * dim);
+        for (int i = 0; i < dim; i++){
+            for(int j = 0; j<dim; j++){
+                A[i*dim+j] = i-j;
+                B[i*dim+j] = j-i;
+                res[i*dim+j] = 0;
+            } 
         }
-        puts("");
+        multiplica(A,B,res);
+        for (int i = 0; i < dimA; i++){
+            for(int j = 0; j<dimA; j++){
+                if(res[i*dim+j]!= saida[i*dimA+j]){
+                    puts("ERROR === 'AxB'\n");
+                    goto EXIT;
+                } else{
+                    continue;
+                }
+            }
+        }
     }
-    puts("Vetor de entrada");
-    for(int i=0; i<dimA; i++){
-        for(int j=0; j<dimA; j++){
-            printf("%.1f ",matB[i*dimA+j]);
-        }
-        puts("");
-    }*/
-    puts("Vetor de saida");
+    /*
+    puts("\nVetor de saida");
     for(int i=0; i<dimA; i++){
         for(int j=0; j<dimA; j++){
             printf("%.1f ",saida[i*dimA+j]);
         }
         puts("");
     }
+    puts("\nVetor de saida");
+    for(int i=0; i<dim; i++){
+        for(int j=0; j<dim; j++){
+            printf("%.1f ",res[i*dimA+j]);
+        }
+        puts("");
+    }
+    puts("\nVetor de saida");
+    for(int i=0; i<dim; i++){
+        for(int j=0; j<dim; j++){
+            printf("%.1f ",B[i*dimA+j]);
+        }
+        puts("");
+    }
+    puts("\nVetor de saida");
+    for(int i=0; i<dim; i++){
+        for(int j=0; j<dim; j++){
+            printf("%.1f ",A[i*dimA+j]);
+        }
+        puts("");
+    }
+    */
     //Liberacao de memoria:
-
+    puts("\nTudo certo familia!\n");
+    FREE:
     GET_TIME(inicio);
     free(matA);
     free(matB);
     free(saida);
     free(tid);
     free(args);
-    
     GET_TIME(fim);
+
     delta = fim - inicio;
     printf("Tempo de finalizacao:%lf\n",delta);
     
@@ -168,7 +228,9 @@ int main(int argc){
     }
 
     EXIT:
-
+    free(A);
+    free(B);
+    free(res);
     return printf("FIM");
     
 
