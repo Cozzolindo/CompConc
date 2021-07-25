@@ -215,6 +215,9 @@ int main(){
 
     delta = fim - inicio;
     printf("Tempo de finalizacao:%lf\n",delta);
+    free(A);
+    free(B);
+    free(res);
     
     //Vale a pena ver de novo:
 
@@ -228,9 +231,7 @@ int main(){
     }
 
     EXIT:
-    free(A);
-    free(B);
-    free(res);
+    
     return printf("FIM");
     
 
