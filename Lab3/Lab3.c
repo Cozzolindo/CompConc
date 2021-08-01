@@ -20,9 +20,9 @@ typedef struct{
 
 void* threads( void* arg ){
 
-    tArgs* args = (tArgs*) arg;
-    args = (tArgs*) malloc(sizeof(tArgs));
-    long long int id = 0;
+    //tArgs* args = (tArgs*) arg;
+    tArgs* args = (tArgs*) malloc(sizeof(tArgs));
+    long long int id = (long long int) arg;
     long int tamBloco = dim/nthreads;
     long int start = id*tamBloco;
     long int end;
@@ -36,7 +36,7 @@ void* threads( void* arg ){
         end= start + tamBloco;
     }
     
-    for(long long int i = start; i<end; i ++){
+    for(long long int i = start; i<end; i++){
         
         if( args->max < vetor[i]){
             args->max = vetor[i];
@@ -44,7 +44,7 @@ void* threads( void* arg ){
         if(args->min > vetor[i]){
             args->min = vetor[i];
         }
-        id++;
+        
         
     }
     pthread_exit((void*)args);
@@ -138,7 +138,7 @@ int main(){
     GET_TIME(inicio);
     for(long long int i = 0; i<nthreads; i++){
         
-        if(pthread_create(tid+i, NULL, threads, (void*) NULL)){
+        if(pthread_create(tid+i, NULL, threads, (void*) i)){
             fprintf(stderr, "ERROR === 'pthread_create'\n");
             return 2;
         }
