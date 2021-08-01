@@ -147,3 +147,5 @@ int main(){
     free(retorno);
     return printf("\nFIM!\n");
 }
+
+//NAO FUNCIONAVA PARA QUALQUER VETOR!
