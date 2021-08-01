@@ -36,7 +36,7 @@ void* threads( void* arg ){
         end= start + tamBloco;
     }
     
-    for(long long int i = start+1; i<end; i ++){
+    for(long long int i = start; i<end; i ++){
         
         if( args->max < vetor[i]){
             args->max = vetor[i];
