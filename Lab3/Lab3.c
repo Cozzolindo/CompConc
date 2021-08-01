@@ -11,7 +11,6 @@
 long long int dim;
 int nthreads;
 float* vetor;
-//float* retorno;
 
 typedef struct{
     float min;
@@ -35,7 +34,7 @@ void* threads( void* arg ){
     }
     else{
         end= start + tamBloco;
-        }
+    }
     
     for(long long int i = start+1; i<end; i ++){
         
@@ -110,7 +109,6 @@ int main(){
         vetor[i] = ((dim/T)-(dim/C))*(-1);
         T+=3;
         C+=7*(-1);
-        //printf("%f ",vetor[i]);
     }
     
     resultado[0] = vetor[0];
