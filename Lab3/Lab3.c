@@ -11,37 +11,44 @@
 long long int dim;
 int nthreads;
 float* vetor;
-float* retorno;
+//float* retorno;
 
-
+typedef struct{
+    float min;
+    float max;
+} tArgs;
 
 
 void* threads( void* arg ){
 
+    tArgs* args = (tArgs*) arg;
+    args = (tArgs*) malloc(sizeof(tArgs));
     long long int id = 0;
-    float *resultadoC;
-   
-    resultadoC = (float *)malloc(sizeof(float)*2);
-    if(resultadoC == NULL){
-        fprintf(stderr, "ERROR === 'malloc'\n");
-        exit(1);
-    }
-
-    resultadoC[0] = vetor[1];
-    resultadoC[1] = vetor[0];
+    long int tamBloco = dim/nthreads;
+    long int start = id*tamBloco;
+    long int end;
+    args->min=vetor[0];
+    args->max=vetor[0];
     
-    for(long long int i = id; i<dim; i += nthreads){
+    if(id == nthreads-1){
+        end=dim;
+    }
+    else{
+        end= start + tamBloco;
+        }
+    
+    for(long long int i = start+1; i<end; i ++){
         
-        if( resultadoC[0] < vetor[i]){
-            resultadoC[0] = vetor[i];
+        if( args->max < vetor[i]){
+            args->max = vetor[i];
         }
-        if(resultadoC[1] > vetor[i]){
-            resultadoC[1] = vetor[i];
+        if(args->min > vetor[i]){
+            args->min = vetor[i];
         }
-        id = id+1;
+        id++;
         
     }
-    pthread_exit((void*)resultadoC);
+    pthread_exit((void*)args);
 
 
 }
@@ -51,6 +58,8 @@ int main(){
     double inicio, fim, delta;
     float* resultado;
     pthread_t *tid;
+    float *resposta;
+    tArgs *retorno;
 
 
     //Inicializando
@@ -61,6 +70,11 @@ int main(){
 
     //Alocando memoria:
     GET_TIME(inicio);
+    retorno = (tArgs*) malloc(sizeof(tArgs));
+    if(retorno == NULL){
+        puts("ERROR === 'malloc'\n");
+        return 1;
+    }
     vetor = (float*)malloc(sizeof(float) * dim);
     if(vetor == NULL){
         fprintf(stderr,"ERROR === 'malloc'\n");
@@ -69,6 +83,11 @@ int main(){
     
     resultado = (float*)malloc(sizeof(float) * 2);
     if(resultado == NULL){
+        fprintf(stderr,"ERROR === 'malloc'\n");
+        return 1;
+    }
+    resposta = (float*)malloc(sizeof(float) * 2);
+    if(resposta == NULL){
         fprintf(stderr,"ERROR === 'malloc'\n");
         return 1;
     }
@@ -85,12 +104,13 @@ int main(){
 
     //Preenche o vetor de entrada:
     long double T = 3.0;
-    long double C = 7;
+    long double C = 2.0;
     for(long int i = 0; i<dim; i++){
     
-        vetor[i] = ((dim/T)-(dim/C));
+        vetor[i] = ((dim/T)-(dim/C))*(-1);
         T+=3;
-        C+=7;
+        C+=7*(-1);
+        //printf("%f ",vetor[i]);
     }
     
     resultado[0] = vetor[0];
@@ -129,6 +149,19 @@ int main(){
     //Aguarda o termino das threads
     for(long long int i = 0; i<nthreads; i++){
         pthread_join(*(tid+i), (void**)&retorno);
+        if(i==0){
+            resposta[0] = retorno->max;
+            resposta[1] = retorno->min;
+        }
+        else{
+            if(resposta[0]<retorno->max){
+                resposta[0] = retorno->max;
+            }
+            if(resposta[1]>retorno->min){
+                resposta[1] = retorno->min;
+            }
+        }
+        free(retorno);
         
     }
     GET_TIME(fim);
@@ -137,15 +170,13 @@ int main(){
     
     printf("\nMaior valor Sequencial: %.4f\n",resultado[0]);
     printf("Menor valor Sequencial: %.4f\n",resultado[1]);
-    printf("\nMaior valor Concorrente: %.4f\n",retorno[0]);
-    printf("Menor valor Concorrente: %.4f\n",retorno[1]);
+    printf("\nMaior valor Concorrente: %.4f\n",resposta[0]);
+    printf("Menor valor Concorrente: %.4f\n",resposta[1]);
     
     //Liberação de memoria:
     free(vetor);
     free(resultado);
     free(tid);
-    free(retorno);
+    free(resposta);
     return printf("\nFIM!\n");
 }
-
-//NAO FUNCIONAVA PARA QUALQUER VETOR!
