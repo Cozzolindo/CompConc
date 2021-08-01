@@ -1,3 +1,7 @@
+# Computação Concorrente
+
+
+
 Medições para o vetor de tamanho 100000:
 
 2 threads:
