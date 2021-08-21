@@ -23,9 +23,9 @@ void* A (void* t){
 
     pthread_mutex_lock(&mutex);
     x++;
-    if(x == 1){
-        pthread_cond_broadcast(&ycond);
-    }
+    
+    pthread_cond_broadcast(&ycond);
+    
     pthread_mutex_unlock(&mutex);
     pthread_exit(NULL);
 
@@ -80,10 +80,10 @@ int main(){
     pthread_cond_init(&xcond, NULL);
     pthread_cond_init(&ycond, NULL);
 
-    pthread_create(&threads[0], NULL, A, NULL);
-    pthread_create(&threads[1], NULL, B, NULL);
-    pthread_create(&threads[2], NULL, C, NULL);
-    pthread_create(&threads[3], NULL, D, NULL);
+    pthread_create(&threads[1], NULL, A, NULL);
+    pthread_create(&threads[0], NULL, B, NULL);
+    pthread_create(&threads[3], NULL, C, NULL);
+    pthread_create(&threads[2], NULL, D, NULL);
 
     for(i = 0; i<nThreads; i++){
         pthread_join(threads[i], NULL);
