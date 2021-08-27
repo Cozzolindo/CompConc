@@ -3,19 +3,7 @@
 #include <math.h>
 #include "timer.h"
 
-long long int dim;
-/*
-void backSUBS(int dim, double A[dim][dim], double b[dim], double x[dim]){
-	
-	for (int i=dim-1; i >= 0; i--){
-		x[i] = b[i];
-		for (int j=i+1; j<dim; j++){
-			x[i] -= A[i][j]*x[j];
-		}
-		x[i] = x[i] / A[i][i];
-	}
-}
-*/
+
 void backSUBS(int dim, double* A, double* b, double* x){
 	
 	for (int i=dim-1; i >= 0; i--){
@@ -26,28 +14,7 @@ void backSUBS(int dim, double* A, double* b, double* x){
 		x[i] = x[i] / A[i*dim+i];
 	}
 }
-/*
-double itsRight(double A[dim][dim], double x[dim], double b[dim]){
-    double* answer = (double*)malloc(sizeof(double)*dim);
-    double rowSUM;
 
-    for(int i = 0; i<dim; i++){
-        rowSUM = 0;
-        for(int j = 0; j<dim; j++){
-            rowSUM += A[i][j]*x[j];
-        }
-        answer[i] = rowSUM;
-    }
-
-    double sumSQUARES = 0;
-    double residual;
-    for (int k = 0; k<dim; k++){
-        residual = answer[k] - b[k];
-        sumSQUARES += residual*residual;
-    }
-    sumSQUARES = sqrt(sumSQUARES);
-}
-*/
 double itsRight(double* A, double* x, double* b){
     double* answer = (double*)malloc(sizeof(double)*dim);
     double rowSUM;
@@ -74,7 +41,7 @@ int main(){
     
     srand(time(NULL));
     double m, inicio, fim, starting, seq;
-
+    int dim;
     puts("Digite a dimensao da matriz:\n");
     scanf("%d", &dim);
     double* A;
