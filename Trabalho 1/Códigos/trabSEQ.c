@@ -15,7 +15,7 @@ void backSUBS(int dim, double* A, double* b, double* x){
 	}
 }
 
-double itsRight(double* A, double* x, double* b){
+double itsRight(int dim, double* A, double* x, double* b){
     double* answer = (double*)malloc(sizeof(double)*dim);
     double rowSUM;
 
@@ -137,7 +137,7 @@ int main(){
     }
     OVER:
     puts("\n****************************************************\n");
-    double correct = itsRight(A, x, b);
+    double correct = itsRight(dim, A, x, b);
     printf("\n Ax-b vale: %.4f\n", correct);
     printf("\n A eliminacao gaussiana levou cerca de %lf segundos de forma sequencial.",starting+seq);
     free(A);
