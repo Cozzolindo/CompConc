@@ -1,3 +1,9 @@
+/*
+    Carlos Cozzolino
+    DRE: 115086800
+    Laboratório 5 - Computação Concorrente
+*/
+
 #include <pthread.h>
 #include <stdio.h>
 #include <stdlib.h> 
