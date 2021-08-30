@@ -12,23 +12,23 @@ Aqui temos algumas medições que foram feitas na máquina gamer do aluno Carlos
 
 1ª medição sequencial:  0.270550 segundos\
 2ª medição sequencial:  0.271380 segundos\
-3ª medição sequencial:  0.272781 segundos\
+3ª medição sequencial:  0.272781 segundos
 
 1ª medição concorrente com 2 threads: 0.475016 segundos\ 
 2ª medição concorrente com 2 threads: 0.483147 segundos\
-3ª medição concorrente com 2 threads: 0.453408 segundos\
+3ª medição concorrente com 2 threads: 0.453408 segundos
 
 1ª medição concorrente com 8 threads: 0.504999 segundos\
 2ª medição concorrente com 8 threads: 0.509809 segundos\
-3ª medição concorrente com 8 threads: 0.506152 segundos\
+3ª medição concorrente com 8 threads: 0.506152 segundos
 
 1ª medição concorrente com 16 threads: 0.867739 segundos\
 2ª medição concorrente com 16 threads: 0.874010 segundos\
-3ª medição concorrente com 16 threads: 0.871277 segundos\
+3ª medição concorrente com 16 threads: 0.871277 segundos
 
 Desempenho para 2 threads:  0.577166\
 Desempenho para 8 threads:  0.535655\
-Desempenho para 16 threads: 0.311784\
+Desempenho para 16 threads: 0.311784
 
 ### Para matriz de dimensão 1500:
 
