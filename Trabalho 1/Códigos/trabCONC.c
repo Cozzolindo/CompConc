@@ -4,7 +4,8 @@
 #include <pthread.h>
 #include "timer.h"
 
-int nthreads;
+
+int nthreads;   //Nº de threads como uma variável global para podermos usar na função main e na função das threads
 
 
 struct Data {
@@ -12,8 +13,9 @@ struct Data {
     int j;
     double** A;
     double *b;
-} tArgs;
+} tArgs;    //Struct que armazena alguns dados da matriz que será escalonada
 
+//Função que realiza o escalonamento usando as threads
 void *escalonamento(void *arg){
     long long int id = (long long int) arg;
     double** A = tArgs.A;
@@ -32,6 +34,7 @@ void *escalonamento(void *arg){
     pthread_exit(NULL);
 }
 
+//Função que faz a substituição reversa para resolver a matriz após o escalonamento
 void backSUBS(int dim, double** A, double* b, double* x){
 	
 	for (int i=dim-1; i >= 0; i--){
@@ -43,6 +46,7 @@ void backSUBS(int dim, double** A, double* b, double* x){
 	}
 }
 
+//Função que realiza a soma do mínimo dos quadrados para verificar se Ax-b = 0
 double itsRight(int dim, double** A, double* x, double* b){
     double* answer = (double*)malloc(sizeof(double)*dim);
     double rowSUM;
@@ -109,6 +113,7 @@ int main(){
     int select;
     scanf("%d", &select);
     if (select == 1){
+
     //Mostrando os valores iniciais:
         puts("\n                STARTING MATRIX     \n");
         for (int i=0; i<dim; i++){
@@ -126,14 +131,16 @@ int main(){
         goto HERE;
     }
     HERE:
-            //Alocando valores da struct:
+
+    //Alocando valores da struct:
     GET_TIME(inicio);
     tArgs.A = A;
     tArgs.b = b;
     tArgs.dim = dim;
 
-            //Criando as Threads:
+    //Criando as Threads:
     for( int j = 0; j< dim-1; j++){
+        //Originalmente a ideia era introduzir uma função de pivoteamento nesse laço e compartilhar o 'j' para ler a matriz
         tArgs.j = j;
         for(long long int i = 0; i<nthreads; i++){
             if(pthread_create(tid+i, NULL, escalonamento, (void *)i)){
