@@ -10,7 +10,7 @@ Aqui temos algumas medições que foram feitas na máquina gamer do aluno Carlos
 
 ### Para matriz de dimensão 500:
 
-1ª medição sequencial:  0.270550 segundos
+1ª medição sequencial:  0.270550 segundos <\br>
 2ª medição sequencial:  0.271380 segundos
 3ª medição sequencial:  0.272781 segundos
 
