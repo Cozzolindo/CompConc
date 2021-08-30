@@ -30,6 +30,16 @@ void barrier (int nThreads){
     pthread_mutex_unlock(&xmutex);
 }
 
+int myRand(){
+    int r = 0;
+    int res = 1;
+    srand(time(NULL));
+    while(r<10){
+        res += (rand()*r);
+        r++;
+    }
+    return abs(res);
+}
 
 
 
@@ -37,7 +47,6 @@ void* task(void* arg){
     int id = *(int*) arg;
     int sum = 0;
     int x = 0;
-    int myRand = rand();
     while(x<nThreads){
         for(int i = 0; i<nThreads; i++){
             sum = sum += vector[i];
@@ -46,7 +55,7 @@ void* task(void* arg){
             barrier(nThreads);
             sleep(1);       
         }
-        vector[id] = (id*myRand)%9;
+        vector[id] = ((id+1)*myRand())%10;
         printf("Thread |%d| trocou o valor de vector[%d] para [%d]\n", id, id, vector[id]);
         barrier(nThreads);
         sleep(1); 
@@ -79,7 +88,7 @@ int main(){
    
 
     for(int i = 0; i<nThreads; i++){
-        vector[i] = rand()%9;
+        vector[i] = rand()%10;
     }
     puts("\nVetor INICIAL:\n");
     for(int i = 0; i<nThreads; i++){
