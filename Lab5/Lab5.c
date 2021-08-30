@@ -33,35 +33,24 @@ void barrier (int nThreads){
 
 
 
-
-int myRand ()  
-{ 
-    srand(time(NULL));
-    int next; 
-    next = ((rand() * rand()) / 100 ) % 10000 ; 
-    return next ; 
-} 
-
 void* task(void* arg){
     int id = *(int*) arg;
     int sum = 0;
     int x = 0;
+    int myRand = rand();
     while(x<nThreads){
         for(int i = 0; i<nThreads; i++){
             sum = sum += vector[i];
             printf("(%dth)\n",i+1);
             printf("Thread |%d| com soma [%d]\n", id, sum);
             barrier(nThreads);
-            sleep(1);
-            if (id == i)
-            {
-                vector[i] = myRand()%9;
-                printf("Thread |%d| trocou o valor de vector[%d] para [%d]\n", id, i, vector[i]);    
-            }
-            barrier(nThreads);
-            sleep(1);    
+            sleep(1);       
         }
-        if(id ==0){
+        vector[id] = (id*myRand)%9;
+        printf("Thread |%d| trocou o valor de vector[%d] para [%d]\n", id, id, vector[id]);
+        barrier(nThreads);
+        sleep(1); 
+        if(id == 0){
             for(int i = 0; i<nThreads; i++){
             printf("[%d]", vector[i]);
             }
