@@ -11,68 +11,68 @@ Aqui temos algumas medições que foram feitas na máquina gamer do aluno Carlos
 ### Para matriz de dimensão 500:
 
 1ª medição sequencial:  0.270550 segundos\
-2ª medição sequencial:  0.271380 segundos
-3ª medição sequencial:  0.272781 segundos
+2ª medição sequencial:  0.271380 segundos\
+3ª medição sequencial:  0.272781 segundos\
 
-1ª medição concorrente com 2 threads: 0.475016 segundos 
-2ª medição concorrente com 2 threads: 0.483147 segundos
-3ª medição concorrente com 2 threads: 0.453408 segundos
+1ª medição concorrente com 2 threads: 0.475016 segundos\ 
+2ª medição concorrente com 2 threads: 0.483147 segundos\
+3ª medição concorrente com 2 threads: 0.453408 segundos\
 
-1ª medição concorrente com 8 threads: 0.504999 segundos
-2ª medição concorrente com 8 threads: 0.509809 segundos
-3ª medição concorrente com 8 threads: 0.506152 segundos
+1ª medição concorrente com 8 threads: 0.504999 segundos\
+2ª medição concorrente com 8 threads: 0.509809 segundos\
+3ª medição concorrente com 8 threads: 0.506152 segundos\
 
-1ª medição concorrente com 16 threads: 0.867739 segundos
-2ª medição concorrente com 16 threads: 0.874010 segundos
-3ª medição concorrente com 16 threads: 0.871277 segundos
+1ª medição concorrente com 16 threads: 0.867739 segundos\
+2ª medição concorrente com 16 threads: 0.874010 segundos\
+3ª medição concorrente com 16 threads: 0.871277 segundos\
 
-Desempenho para 2 threads:  0.577166
-Desempenho para 8 threads:  0.535655
-Desempenho para 16 threads: 0.311784
+Desempenho para 2 threads:  0.577166\
+Desempenho para 8 threads:  0.535655\
+Desempenho para 16 threads: 0.311784\
 
 ### Para matriz de dimensão 1500:
 
-1ª medição sequencial:  4.881975 segundos
-2ª medição sequencial:  5.578578 segundos
-3ª medição sequencial:  5.459147 segundos
+1ª medição sequencial:  4.881975 segundos\
+2ª medição sequencial:  5.578578 segundos\
+3ª medição sequencial:  5.459147 segundos\
 
-1ª medição concorrente com 2 threads: 6.625512 segundos 
-2ª medição concorrente com 2 threads: 6.554548 segundos
-3ª medição concorrente com 2 threads: 6.658968 segundos
+1ª medição concorrente com 2 threads: 6.625512 segundos\ 
+2ª medição concorrente com 2 threads: 6.554548 segundos\
+3ª medição concorrente com 2 threads: 6.658968 segundos\
 
-1ª medição concorrente com 8 threads: 2.164055 segundos
-2ª medição concorrente com 8 threads: 2.119707 segundos
-3ª medição concorrente com 8 threads: 2.144198 segundos
+1ª medição concorrente com 8 threads: 2.164055 segundos\
+2ª medição concorrente com 8 threads: 2.119707 segundos\
+3ª medição concorrente com 8 threads: 2.144198 segundos\
 
-1ª medição concorrente com 16 threads: 2.770309 segundos
-2ª medição concorrente com 16 threads: 2.788512 segundos
-3ª medição concorrente com 16 threads: 2.790594 segundos
+1ª medição concorrente com 16 threads: 2.770309 segundos\
+2ª medição concorrente com 16 threads: 2.788512 segundos\
+3ª medição concorrente com 16 threads: 2.790594 segundos\
 
-Desempenho para 2 threads:  0.802444
-Desempenho para 8 threads:  2.476633
-Desempenho para 16 threads: 1.906684
+Desempenho para 2 threads:  0.802444\
+Desempenho para 8 threads:  2.476633\
+Desempenho para 16 threads: 1.906684\
 
 ### Para matriz de dimensão 3500:
 
-1ª medição sequencial:  65.809304 segundos
-2ª medição sequencial:  63.131286 segundos
-3ª medição sequencial:  61.699948 segundos
+1ª medição sequencial:  65.809304 segundos\
+2ª medição sequencial:  63.131286 segundos\
+3ª medição sequencial:  61.699948 segundos\
 
-1ª medição concorrente com 2 threads: 64.821022 segundos 
-2ª medição concorrente com 2 threads: 64.273954 segundos
-3ª medição concorrente com 2 threads: 63.529732 segundos
+1ª medição concorrente com 2 threads: 64.821022 segundos\ 
+2ª medição concorrente com 2 threads: 64.273954 segundos\
+3ª medição concorrente com 2 threads: 63.529732 segundos\
 
-1ª medição concorrente com 8 threads: 15.746623 segundos
-2ª medição concorrente com 8 threads: 15.742121 segundos
-3ª medição concorrente com 8 threads: 14.619333 segundos
+1ª medição concorrente com 8 threads: 15.746623 segundos\
+2ª medição concorrente com 8 threads: 15.742121 segundos\
+3ª medição concorrente com 8 threads: 14.619333 segundos\
 
-1ª medição concorrente com 16 threads: 14.718992 segundos
-2ª medição concorrente com 16 threads: 15.627297 segundos
-3ª medição concorrente com 16 threads: 14.769650 segundos
+1ª medição concorrente com 16 threads: 14.718992 segundos\
+2ª medição concorrente com 16 threads: 15.627297 segundos\
+3ª medição concorrente com 16 threads: 14.769650 segundos\
 
-Desempenho para 2 threads:  0.989699
-Desempenho para 8 threads:  4.134645
-Desempenho para 16 threads: 4.225570
+Desempenho para 2 threads:  0.989699\
+Desempenho para 8 threads:  4.134645\
+Desempenho para 16 threads: 4.225570\
 
 ## Disucussão:
 
