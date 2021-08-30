@@ -80,6 +80,7 @@ int main(){
     double *b, *x;
     double inicio, fim, starting, conc;
     
+	//Digitar um valor n para a matriz[n][n]
     puts("Digite a dimensao da matriz:\n");
     scanf("%d", &dim);
     puts("Digite o numero de threads que deseja utilizar:\n");
