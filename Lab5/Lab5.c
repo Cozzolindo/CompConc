@@ -51,6 +51,7 @@ void* task(void* arg){
         barrier(nThreads);
         sleep(1); 
         if(id == 0){
+            puts("Novo vetor:");
             for(int i = 0; i<nThreads; i++){
             printf("[%d]", vector[i]);
             }
