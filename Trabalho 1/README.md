@@ -14,7 +14,7 @@ Aqui temos algumas medições que foram feitas na máquina gamer do aluno Carlos
 2ª medição sequencial:  0.271380 segundos\
 3ª medição sequencial:  0.272781 segundos
 
-1ª medição concorrente com 2 threads: 0.475016 segundos\ 
+1ª medição concorrente com 2 threads: 0.475016 segundos\
 2ª medição concorrente com 2 threads: 0.483147 segundos\
 3ª medição concorrente com 2 threads: 0.453408 segundos
 
