@@ -23,6 +23,7 @@ int FazAlgo(long long int x){
 
 //Funcao T1 apresentada no exercício
 void *T1 (void *arg) {
+    sleep(5);
     for(;;) { //Loop infinito que aprendi com a Silvana e agora vivo repetindo
         
         FazAlgo(contador);
@@ -35,7 +36,7 @@ void *T1 (void *arg) {
             
             pthread_cond_broadcast(&condt1);
             c = 2;
-            sleep(10); //Sleep utilizado para garantir que T2 tera tempo de ser executado
+            sleep(1); //Sleep para ajudar na leitura
         }
         
         pthread_mutex_unlock(&mutex);
@@ -75,13 +76,13 @@ int main(){
      //Prints para te tirar do tedio de ter que esperar o contador chegar ate o 100
     //e para ver que o programa ainda ta executando firme e forte
     puts("Estamos preparando tudo para voce!");
-    sleep(2);
+    sleep(1);
     puts("Isso pode levar mais alguns segundos...");
-    sleep(2);
+    sleep(1);
     puts("Ainda pode demorar um pouco...");
-    sleep(2);
+    sleep(1);
     puts("Nao esqueca de se hidratar para continuar nos dando aulas!");
-    sleep(2);
+    sleep(1);
     puts("Quase la...");
     
     for (int i = 0; i < nThreads; i++) {
