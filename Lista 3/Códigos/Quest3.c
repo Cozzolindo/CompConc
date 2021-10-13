@@ -13,7 +13,7 @@ unsigned int count = 1; // Variavel para efetuar a leitura e escrita
 void *lettore(){
     
     printf("Leitor [%d] criado.\n", pthread_self());//Print dos leitores criados
-    sleep(1);
+    //sleep(1);
 
     //Loop feito para facilitar a corretude do programa
     for(;;)
@@ -38,7 +38,7 @@ void *lettore(){
 
         sem_post(&mutex); //Fecha a parte crítica da funcao, para os leitores efetuarem a leitura
         printf("\nLeitor [%d] esta lendo.", pthread_self());
-        sleep(1);
+        //sleep(1);
         printf("\nLeitor [%d] leu: [%d].\n", pthread_self(), count);
         sem_wait(&mutex); // Libera a parte critica da funcao
 
@@ -46,7 +46,7 @@ void *lettore(){
         
         if(readers == 0){ // Caso a fila de leitores seja zero, podemos avisar os escritores para começarem a escrever
             sem_post(&wrt);
-            sleep(1);
+            //sleep(1);
         }
         sem_post(&mutex);
         
@@ -57,7 +57,7 @@ void *lettore(){
 void *scrittore(){
 
     printf("Escritor |%d| criado.\n", pthread_self());
-    sleep(1);
+    //sleep(1);
 
     for(;;){
         
@@ -83,7 +83,7 @@ void *scrittore(){
         
         if(writers == 0){ // Caso a fila de escritores seja zero, podemos avisar os leitores para lerem os novos dados
             sem_post(&prior);
-            sleep(1);
+            //sleep(1);
         }
         sem_post(&mutex);
         
